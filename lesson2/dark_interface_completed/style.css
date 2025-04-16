@@ -1,0 +1,71 @@
+/* General background and font settings */
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #1e1e1e;
+    -fx-text-fill: #ffffff;
+}
+
+/* Friend list (left ListView) */
+.listview {
+    -fx-control-inner-background: #252526;
+    -fx-background-insets: 0;
+    -fx-border-color: #333;
+    -fx-border-width: 0 1 0 0;
+    -fx-text-fill: #ffffff;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10 8;
+}
+
+.list-cell:hover {
+    -fx-background-color: #3a3d41;
+}
+
+.list-cell:selected {
+    -fx-background-color: #007acc;
+    -fx-text-fill: white;
+}
+
+/* Message area (TextArea) */
+.messagearea {
+    -fx-control-inner-background: #555;
+    -fx-region-background: #555;
+    -fx-background-color: #555;
+    -fx-border-color: #555;
+    -fx-text-fill: #dddddd;
+    -fx-border-color: #111;
+    -fx-font-size: 14px;
+}
+
+/* Bottom input area (HBox) */
+.inputbox {
+    -fx-background-color: #2d2d30;
+    -fx-border-color: #444;
+    -fx-border-width: 1 0 0 0;
+}
+
+/* Text input field */
+.inputbox .text-field {
+    -fx-background-color: #3c3c3c;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #bbbbbb;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #555;
+}
+
+/* Send button */
+.sendbtn {
+    -fx-background-color: #007acc;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.sendbtn:hover {
+    -fx-background-color: #0e639c;
+}
