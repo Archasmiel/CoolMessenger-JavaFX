@@ -1,0 +1,24 @@
+.messenger-listview {
+    -fx-background-color: #f0f0f0;
+    background-color: #f0f0f0;
+}
+
+.messenger-messagearea {
+    -fx-background-color: #ffffff; 
+    background-color: #ffffff;
+    -fx-font-size: 14px;
+    font-size: 14px;
+}
+
+.messenger-sendbtn {
+    -fx-background-color: #4CAF50; 
+    -fx-text-fill: white;
+    background-color: #4CAF50; 
+}
+
+.messenger-inputbox {
+    -fx-background-color: #e0e0e0;
+    background-color: #e0e0e0;
+}
+
+

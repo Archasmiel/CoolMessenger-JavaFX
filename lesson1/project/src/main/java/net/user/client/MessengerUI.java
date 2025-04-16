@@ -1,0 +1,68 @@
+package net.user.client;
+
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+
+public class MessengerUI {
+
+    private ListView<String> contactList;
+    private TextArea messageArea;
+    private TextField messageInput;
+    private Button sendButton;
+
+    private HBox inputBox;
+    private BorderPane root;
+
+    public void show(Stage stage) {
+        // Contact list (left pane)
+        contactList = new ListView<>();
+        contactList.getItems().addAll("Alice", "Bob", "Charlie");
+        contactList.setPrefWidth(150);   // бажана ширина
+        contactList.setStyle("-fx-background-color: #f0f0f0;");
+
+        // Message area (center pane)
+        messageArea = new TextArea();
+        messageArea.setEditable(false);  // не редагується
+        messageArea.setWrapText(true);   // переносити рядки
+        messageArea.setStyle("-fx-background-color: #ffffff; -fx-font-size: 14px;");
+
+        // Input area (bottom)
+        messageInput = new TextField();
+        messageInput.setPromptText("Type a message...");
+        HBox.setHgrow(messageInput, Priority.ALWAYS);  // щоб поле вводу збільшувалося під розмір вікна
+
+        sendButton = new Button("Send");
+        sendButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
+
+        inputBox = new HBox(5, messageInput, sendButton);
+        inputBox.setPadding(new Insets(5));   // внутрішній відступ
+        inputBox.setStyle("-fx-background-color: #e0e0e0;");
+
+        // Simple send action
+        sendButton.setOnAction(e -> {
+            String message = messageInput.getText();
+            if (!message.trim().isEmpty()) {
+                messageArea.appendText("You: " + message + "\n");
+                messageInput.clear();
+            }
+        });
+
+        // Layout
+        root = new BorderPane();
+        root.setLeft(contactList);   // позиціонування в панелі
+        root.setCenter(messageArea);
+        root.setBottom(inputBox);
+
+        // Scene and stage setup
+        Scene scene = new Scene(root, 600, 400);
+        stage.setTitle("Cool Messenger");
+        stage.setScene(scene);
+        stage.setMinWidth(400);
+        stage.setMinHeight(300);
+        stage.show();
+    }
+
+}
