@@ -3,6 +3,7 @@ package net.user.client.ui;
 import javafx.geometry.Pos;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -12,13 +13,20 @@ public class UserCell extends ListCell<User> {
 
     private final HBox content;
     private final Circle statusDot;
+    private final VBox textContainer;
     private final Text nameText;
+    private final Text nicknameText;
 
     public UserCell() {
         statusDot = new Circle(6);
+
         nameText = new Text();
         nameText.setFill(Color.WHITE);
-        content = new HBox(10, statusDot, nameText);
+        nicknameText = new Text();
+        nicknameText.setFill(Color.GRAY);
+        textContainer = new VBox(5, nameText, nicknameText);
+
+        content = new HBox(10, statusDot, textContainer);
         content.setAlignment(Pos.CENTER_LEFT);
     }
 
@@ -29,6 +37,7 @@ public class UserCell extends ListCell<User> {
             setGraphic(null);
         } else {
             nameText.setText(user.getName());
+            nicknameText.setText(user.getNickname());
             statusDot.setFill(user.isOnline() ? Color.LIMEGREEN : Color.GRAY);
             setGraphic(content);
         }

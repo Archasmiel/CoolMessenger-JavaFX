@@ -7,17 +7,22 @@ import java.util.List;
 
 public class User {
     private String name;
+    private String nickname;
     private List<MessageBubble> messages;
     private boolean isOnline;
 
-    public User(String name) {
+    public User(String name, String nickname) {
         this.name = name;
+        this.nickname = nickname;
         this.messages = new ArrayList<>();
         this.isOnline = false;
     }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
+    public String getNickname() { return nickname; }
+    public void setNickname(String nickname) { this.nickname = nickname; }
 
     public List<MessageBubble> getMessages() { return messages; }
     public void addMessage(MessageBubble bubble) { messages.add(bubble); }

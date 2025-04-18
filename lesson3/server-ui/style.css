@@ -1,0 +1,49 @@
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #121212;
+    -fx-text-fill: #e0e0e0;
+}
+
+.console-area {
+    -fx-control-inner-background: #1e1e1e;
+    -fx-text-fill: #dcdcdc;
+    -fx-font-family: "Consolas", monospace;
+    -fx-font-size: 13px;
+    -fx-background-insets: 0;
+    -fx-border-color: #2e2e2e;
+    -fx-border-width: 1;
+}
+
+.command-field {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #f5f5f5;
+    -fx-border-color: #444;
+    -fx-border-radius: 3;
+    -fx-padding: 5;
+}
+
+.send-button {
+    -fx-background-color: #3a7afe;
+    -fx-text-fill: white;
+    -fx-padding: 5 15 5 15;
+    -fx-background-radius: 3;
+    -fx-font-weight: bold;
+}
+
+.send-button:hover {
+    -fx-background-color: #5a92f7;
+}
+
+.section-label {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: #ffffff;
+}
+
+.list-view {
+    -fx-control-inner-background: #1e1e1e;
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: #2e2e2e;
+    -fx-text-fill: #dcdcdc;
+}

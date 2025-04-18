@@ -16,6 +16,7 @@ import net.user.client.util.ChatMessage;
 import net.user.client.util.User;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class MessengerUI {
 
@@ -48,10 +49,10 @@ public class MessengerUI {
     public void initialize() {
         listView.setCellFactory(info -> new UserCell());
         listView.getItems().addAll(
-                new User("Serhii"),
-                new User("Andrii"),
-                new User("Taras"),
-                new User("Shush")
+                new User("Serhii", "@serhii"),
+                new User("Andrii", "@andrii"),
+                new User("Taras", "@taras"),
+                new User("Shush", "@shush")
         );
 
         chatArea = new ChatArea();
@@ -78,4 +79,34 @@ public class MessengerUI {
         }
     }
 
+    public static String getInput(String prompt) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Input");
+        dialog.setHeaderText(null);
+        dialog.setContentText(prompt);
+
+        Optional<String> result = dialog.showAndWait();
+        return result.orElse(null);
+    }
+
+    public void addUser(ActionEvent actionEvent) {
+        String input = getInput("Enter username");
+        if (input == null) return;
+
+        // System.out.println(input);
+    }
+
+    public void renameUser(ActionEvent actionEvent) {
+        String input = getInput("Enter username");
+        if (input == null) return;
+
+        // System.out.println(input);
+    }
+
+    public void removeUser(ActionEvent actionEvent) {
+        String input = getInput("Enter username");
+        if (input == null) return;
+
+        // System.out.println(input);
+    }
 }
