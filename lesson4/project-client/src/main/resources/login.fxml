@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="net.user.client.LoginUI"
+            prefHeight="400.0" prefWidth="600.0">
+
+  <VBox alignment="CENTER" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+    <GridPane alignment="CENTER" hgap="10" vgap="10">
+      <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+      </padding>
+
+      <!-- IP Address -->
+      <Label text="IP Address:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+      <TextField fx:id="ipAddressField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+      <!-- Port -->
+      <Label text="Port:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+      <TextField fx:id="portField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+      <!-- Nickname -->
+      <Label text="Nickname:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+      <TextField fx:id="nicknameField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+      <!-- Password -->
+      <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+      <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    </GridPane>
+
+    <!-- Connect Button -->
+    <Button fx:id="connectButton" text="Connect" mnemonicParsing="false">
+      <VBox.margin>
+        <Insets top="20"/>
+      </VBox.margin>
+    </Button>
+  </VBox>
+</AnchorPane>
