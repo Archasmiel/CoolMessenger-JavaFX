@@ -27,6 +27,12 @@ public class MessengerUI {
     @FXML public Button sendBtn;
     public ChatArea chatArea;
 
+    private String nickname;
+
+    public MessengerUI(String nickname) {
+        this.nickname = nickname;
+    }
+
     public void show(Stage stage) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(MAIN_UI));
         Parent root;

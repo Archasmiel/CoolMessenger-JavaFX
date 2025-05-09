@@ -1,5 +1,6 @@
 package net.user.client;
 
+import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -8,6 +9,7 @@ import java.util.function.Function;
 
 public class Main extends Application {
 
+    public static final Gson GSON = new Gson();
     private static Stage PRIMARY_STAGE;
 
     @Override
