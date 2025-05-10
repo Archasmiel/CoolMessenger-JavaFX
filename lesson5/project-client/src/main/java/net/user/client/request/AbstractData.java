@@ -1,4 +1,4 @@
-package net.user.client.requests;
+package net.user.client.data;
 
 public abstract class AbstractData {
 

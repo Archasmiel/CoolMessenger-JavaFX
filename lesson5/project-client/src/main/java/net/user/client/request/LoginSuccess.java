@@ -1,7 +1,8 @@
-package net.user.client.requests;
+package net.user.client.auth;
 
 import com.google.gson.JsonObject;
 import net.user.client.Main;
+import net.user.client.data.AbstractData;
 
 public class LoginSuccess extends AbstractData {
 
