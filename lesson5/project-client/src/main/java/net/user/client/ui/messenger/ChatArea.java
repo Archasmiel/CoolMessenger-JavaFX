@@ -1,10 +1,10 @@
-package net.user.client.ui;
+package net.user.client.ui.messenger;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
-import net.user.client.util.ChatMessage;
-import net.user.client.util.User;
+import net.user.client.data.ChatMessage;
+import net.user.client.data.User;
 
 public class ChatArea extends ScrollPane {
 

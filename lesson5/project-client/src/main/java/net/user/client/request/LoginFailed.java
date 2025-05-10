@@ -1,8 +1,7 @@
-package net.user.client.auth;
+package net.user.client.request;
 
 import com.google.gson.JsonObject;
 import net.user.client.Main;
-import net.user.client.data.AbstractData;
 
 public class LoginFailed extends AbstractData {
 

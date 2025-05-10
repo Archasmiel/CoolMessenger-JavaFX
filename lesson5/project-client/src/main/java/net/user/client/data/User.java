@@ -1,6 +1,6 @@
-package net.user.client.util;
+package net.user.client.data;
 
-import net.user.client.ui.MessageBubble;
+import net.user.client.ui.messenger.MessageBubble;
 
 import java.util.ArrayList;
 import java.util.List;

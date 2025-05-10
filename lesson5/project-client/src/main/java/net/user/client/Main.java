@@ -3,9 +3,9 @@ package net.user.client;
 import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import net.user.client.ui.login.LoginUI;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class Main extends Application {
 

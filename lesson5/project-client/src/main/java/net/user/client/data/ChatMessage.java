@@ -1,4 +1,4 @@
-package net.user.client.util;
+package net.user.client.data;
 
 public class ChatMessage {
 

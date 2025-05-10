@@ -1,4 +1,4 @@
-package net.user.client;
+package net.user.client.ui.messenger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,11 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import net.user.client.ui.ChatArea;
-import net.user.client.ui.MessageBubble;
-import net.user.client.ui.UserCell;
-import net.user.client.util.ChatMessage;
-import net.user.client.util.User;
+import net.user.client.data.ChatMessage;
+import net.user.client.data.User;
 
 import java.io.IOException;
 import java.util.Optional;

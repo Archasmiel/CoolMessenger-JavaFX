@@ -1,4 +1,4 @@
-package net.user.client;
+package net.user.client.ui.login;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -11,7 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import net.user.client.requests.LoginData;
+import net.user.client.Main;
+import net.user.client.request.LoginData;
+import net.user.client.ui.messenger.MessengerUI;
 import net.user.client.websocket.ClientWebSocket;
 
 import java.io.IOException;

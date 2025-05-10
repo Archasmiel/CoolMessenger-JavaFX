@@ -1,14 +1,13 @@
-package net.user.client.ui;
+package net.user.client.ui.messenger;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
-import net.user.client.util.ChatMessage;
+import net.user.client.data.ChatMessage;
 
 public class MessageBubble extends VBox {
 

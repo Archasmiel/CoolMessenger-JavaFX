@@ -1,4 +1,4 @@
-package net.user.client.ui;
+package net.user.client.ui.messenger;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.ListCell;
@@ -7,7 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import net.user.client.util.User;
+import net.user.client.data.User;
 
 public class UserCell extends ListCell<User> {
 
