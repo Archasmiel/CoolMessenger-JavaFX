@@ -1,0 +1,119 @@
+package net.user.client.ui.login;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import javafx.application.Platform;
+import javafx.scene.control.Label;
+import lombok.extern.slf4j.Slf4j;
+import net.user.client.ClientSocketService;
+import net.user.client.StageService;
+import net.user.client.request.LoginData;
+import org.springframework.stereotype.Component;
+
+import java.net.URISyntaxException;
+
+@Slf4j
+public class LoginThread extends Thread {
+
+    private static final int TIMEOUT = 100;
+    private static final int MAX_ATTEMPTS = 50;
+
+    private final ClientSocketService socketService;
+    private final StageService stageService;
+    private final Gson gson;
+
+    private final Label statusText;
+    private final String ipAddress;
+    private final String port;
+    private final String nickname;
+    private final String password;
+
+    private int attempts;
+
+    public LoginThread(ClientSocketService socketService,
+                       StageService stageService,
+                       Gson gson,
+                       Label statusText,
+                       String ipAddress, String port,
+                       String nickname, String password) {
+        this.socketService = socketService;
+        this.stageService = stageService;
+        this.gson = gson;
+        this.statusText = statusText;
+        this.ipAddress = ipAddress;
+        this.port = port;
+        this.nickname = nickname;
+        this.password = password;
+    }
+
+    @Override
+    public void run() {
+        try {
+            connectToServer();
+            sendLoginData();
+            waitForLogin();
+        } catch (Exception e) {
+            log.error("Error", e);
+        }
+    }
+
+    private void connectToServer()
+            throws InterruptedException, URISyntaxException {
+        // Try connecting to server
+        Platform.runLater(() -> statusText.setText("Trying to connect to server..."));
+        socketService.connect(ipAddress, port);
+
+        // Waiting for connection
+        attempts = 0;
+        while (!socketService.isOpen() && attempts < MAX_ATTEMPTS) {
+            attempts++;
+            Platform.runLater(() -> statusText
+                    .setText("Connecting... Attempt " +
+                            attempts + "/" + MAX_ATTEMPTS));
+
+            Thread.sleep(TIMEOUT);
+        }
+
+        if (!socketService.isOpen()) {
+            socketService.close();
+            Platform.runLater(() -> statusText.setText("Connection failed!"));
+            return;
+        }
+
+        Platform.runLater(() -> statusText.setText("Connected to server!"));
+    }
+
+    private void sendLoginData() {
+        // Send login data
+        LoginData data = new LoginData(nickname, password);
+        JsonObject jsonData = data.toJson();
+        String dataMsg = gson.toJson(jsonData);
+        socketService.send(dataMsg);
+    }
+
+    private void waitForLogin()
+            throws InterruptedException {
+        // Wait for messenger to be ready
+        attempts = 0;
+        while (!socketService.canOpenMessenger() && attempts < MAX_ATTEMPTS) {
+            attempts++;
+            Platform.runLater(() -> statusText
+                    .setText("Waiting for login response... Attempt "
+                            + attempts + "/" + MAX_ATTEMPTS));
+
+            Thread.sleep(TIMEOUT);
+        }
+
+        if (!socketService.canOpenMessenger()) {
+            socketService.close();
+            Platform.runLater(() -> statusText.setText("Login failed!"));
+            return;
+        }
+
+        Platform.runLater(() -> {
+            statusText.setText("Login successful!");
+            stageService.loadMessengerUI(nickname);
+        });
+    }
+
+}

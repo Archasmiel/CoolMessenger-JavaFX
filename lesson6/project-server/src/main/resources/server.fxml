@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="net.user.server.ServerUI"
+            fx:id="root"
+            stylesheets="@style.css">
+
+    <!-- Console -->
+    <center>
+
+    </center>
+
+    <!-- Command Prompt + Button -->
+    <bottom>
+        <HBox spacing="10.0" alignment="CENTER" BorderPane.alignment="CENTER">
+            <children>
+                <TextField fx:id="commandField"
+                           promptText="Enter command..."
+                           HBox.hgrow="ALWAYS"
+                           styleClass="command-field"/>
+                <Button fx:id="sendButton"
+                        text="Send"
+                        defaultButton="true"
+                        styleClass="send-button"/>
+            </children>
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+        </HBox>
+    </bottom>
+
+    <!-- ListView (e.g., connected clients) -->
+    <right>
+        <VBox spacing="5.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Clients" styleClass="section-label"/>
+                <ListView fx:id="clientList" VBox.vgrow="ALWAYS" prefWidth="150" />
+            </children>
+            <padding>
+                <Insets top="3" right="3" bottom="3" left="3"/>
+            </padding>
+        </VBox>
+    </right>
+</BorderPane>
