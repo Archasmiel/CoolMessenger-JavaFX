@@ -3,31 +3,23 @@ package net.user.client.ui.login;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import net.user.client.ClientSocketService;
 import net.user.client.StageService;
-import net.user.client.websocket.ClientWebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-
 @Component
+@Scope("prototype")
 public class LoginUI {
 
-    @Autowired
-    private ClientSocketService socketService;
-    @Autowired
-    private StageService stageService;
-    @Autowired
-    private Gson gson;
+    private final ClientSocketService socketService;
+    private final StageService stageService;
+    private final Gson gson;
 
     @FXML private TextField ipAddressField;
     @FXML private TextField portField;
@@ -35,6 +27,17 @@ public class LoginUI {
     @FXML private PasswordField passwordField;
     @FXML private Button connectButton;
     @FXML public Label statusText;
+
+        @Autowired
+        public LoginUI(
+                ClientSocketService socketService,
+                StageService stageService,
+                Gson gson
+        ) {
+            this.socketService = socketService;
+            this.stageService = stageService;
+            this.gson = gson;
+        }
 
     @FXML
     public void initialize() {

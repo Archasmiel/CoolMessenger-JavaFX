@@ -3,7 +3,6 @@ package net.user.client.request;
 import com.google.gson.JsonObject;
 import lombok.Getter;
 
-
 @Getter
 public class LoginData extends AbstractData {
 

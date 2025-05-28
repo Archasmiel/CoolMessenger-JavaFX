@@ -12,12 +12,13 @@ import javafx.scene.layout.BorderPane;
 import lombok.Setter;
 import net.user.client.data.ChatMessage;
 import net.user.client.data.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
+@Scope("prototype")
 public class MessengerUI {
 
     @FXML
@@ -27,9 +28,6 @@ public class MessengerUI {
     @FXML
     public Button sendBtn;
     public ChatArea chatArea;
-
-    @Setter
-    private String nickname;
 
     @FXML
     public void initialize() {

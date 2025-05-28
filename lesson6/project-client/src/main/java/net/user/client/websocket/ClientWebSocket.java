@@ -52,6 +52,6 @@ public class ClientWebSocket extends WebSocketClient {
 
     @Override
     public void onError(Exception ex) {
-        log.error("Error", ex);
+        log.error("{}", ex.getMessage());
     }
 }

@@ -5,54 +5,55 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.Setter;
-import net.user.client.ui.messenger.MessengerUI;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-@Setter
+
 @Service
 public class StageService {
 
-    private Stage stage;
+    private final ApplicationContext context;
+    @Setter private Stage stage;
 
-    public void loadLoginUI() {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/login.fxml"));
-        Parent root;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        Scene scene = new Scene(root, 400, 300);
-        stage.setTitle("Login");
-        stage.setScene(scene);
-        stage.setMinWidth(400);
-        stage.setMinHeight(300);
-        stage.show();
+    @Autowired
+    public StageService(ApplicationContext context) {
+        this.context = context;
     }
 
-    public void loadMessengerUI(String nickname) {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/login.fxml"));
-        Parent root;
+    public void loadLoginUI() {
+        loadFXML("/login.fxml", "Login");
+    }
+
+    public void loadMessengerUI() {
+        loadFXML("/messenger.fxml", "Messenger");
+    }
+
+    private void loadFXML(
+            String fxmlPath,
+            String title
+    ) {
         try {
-            root = loader.load();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(fxmlPath));
+
+            // Важливо для Spring, при створенні буде використано
+            // class який відповідає нашому .fxml controller
+            // Обов'язкова анотація класу @Component/@Service
+            loader.setControllerFactory(context::getBean);
+
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 400, 300);
+            stage.setTitle(title);
+            stage.setScene(scene);
+            stage.setMinWidth(400);
+            stage.setMinHeight(300);
+            stage.show();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to load FXML: " + fxmlPath, e);
         }
-
-        MessengerUI controller = loader.getController();
-        controller.setNickname(nickname);
-
-        Scene scene = new Scene(root, 400, 300);
-        stage.setTitle("Messenger @" + nickname);
-        stage.setScene(scene);
-        stage.setMinWidth(400);
-        stage.setMinHeight(300);
-        stage.show();
     }
 
 }

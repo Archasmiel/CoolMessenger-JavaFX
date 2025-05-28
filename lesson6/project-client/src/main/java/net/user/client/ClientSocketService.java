@@ -10,12 +10,18 @@ import java.net.URISyntaxException;
 @Service
 public class ClientSocketService {
 
-    @Autowired
-    private Gson gson;
-
+    private final Gson gson;
     private ClientWebSocket socket;
 
-    public void connect(
+    @Autowired
+    public ClientSocketService(Gson gson) {
+        this.gson = gson;
+    }
+
+    // synchronized - лише один потік працює
+    // з цим в даний час - черга на змінну/метод
+
+    public synchronized void connect(
             String ip, String port
     ) throws URISyntaxException {
         socket = new ClientWebSocket(ip, port);
@@ -23,25 +29,29 @@ public class ClientSocketService {
         socket.connect();
     }
 
-    public void close() {
+    public synchronized void close() {
         if (socket != null) {
             socket.close();
             socket = null;
         }
     }
 
-    public void send(String msg) {
+    public synchronized void send(String msg) {
         if (socket != null) {
             socket.send(msg);
         }
     }
 
-    public boolean isOpen() {
+    public synchronized boolean isOpen() {
         return socket.isOpen();
     }
 
-    public boolean canOpenMessenger() {
+    public synchronized boolean canOpenMessenger() {
         return socket.isCanOpenMessenger();
+    }
+
+    public synchronized boolean socketNull() {
+        return socket == null;
     }
 
 }

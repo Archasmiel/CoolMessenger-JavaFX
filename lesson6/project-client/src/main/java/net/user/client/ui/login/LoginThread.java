@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.user.client.ClientSocketService;
 import net.user.client.StageService;
 import net.user.client.request.LoginData;
-import org.springframework.stereotype.Component;
 
 import java.net.URISyntaxException;
 
@@ -59,11 +58,11 @@ public class LoginThread extends Thread {
 
     private void connectToServer()
             throws InterruptedException, URISyntaxException {
-        // Try connecting to server
+        // Приєднання до сервера
         Platform.runLater(() -> statusText.setText("Trying to connect to server..."));
         socketService.connect(ipAddress, port);
 
-        // Waiting for connection
+        // Очікування з'єднання...
         attempts = 0;
         while (!socketService.isOpen() && attempts < MAX_ATTEMPTS) {
             attempts++;
@@ -74,17 +73,19 @@ public class LoginThread extends Thread {
             Thread.sleep(TIMEOUT);
         }
 
-        if (!socketService.isOpen()) {
-            socketService.close();
+        if (socketService.isOpen()) {
+            Platform.runLater(() -> statusText.setText("Connected to server!"));
+        } else {
             Platform.runLater(() -> statusText.setText("Connection failed!"));
-            return;
+            socketService.close();
         }
-
-        Platform.runLater(() -> statusText.setText("Connected to server!"));
     }
 
     private void sendLoginData() {
-        // Send login data
+        // Якщо наш сокет пустий - значить ми не приєдналися
+        if (socketService.socketNull()) return;
+
+        // Відправимо дані для логіну серверу
         LoginData data = new LoginData(nickname, password);
         JsonObject jsonData = data.toJson();
         String dataMsg = gson.toJson(jsonData);
@@ -93,7 +94,10 @@ public class LoginThread extends Thread {
 
     private void waitForLogin()
             throws InterruptedException {
-        // Wait for messenger to be ready
+        // Нема сенсу чекати логін, якщо сокет пустий
+        if (socketService.socketNull()) return;
+
+        // Чекаємо на відповідь, що ми зайшли успішно
         attempts = 0;
         while (!socketService.canOpenMessenger() && attempts < MAX_ATTEMPTS) {
             attempts++;
@@ -104,16 +108,15 @@ public class LoginThread extends Thread {
             Thread.sleep(TIMEOUT);
         }
 
-        if (!socketService.canOpenMessenger()) {
-            socketService.close();
+        if (socketService.canOpenMessenger()) {
+            Platform.runLater(() -> {
+                statusText.setText("Login successful!");
+                stageService.loadMessengerUI();
+            });
+        } else {
             Platform.runLater(() -> statusText.setText("Login failed!"));
-            return;
+            socketService.close();
         }
-
-        Platform.runLater(() -> {
-            statusText.setText("Login successful!");
-            stageService.loadMessengerUI(nickname);
-        });
     }
 
 }
