@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'application' // Для роботи як системна програма
+    id 'org.openjfx.javafxplugin' version '0.1.0' // JavaFX плагін
+}
+
+group = 'net.user.client'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "23.0.1" // Версія, щоб плагін встановив
+    modules = ['javafx.controls', 'javafx.fxml'] // Модулі, які треба
+}
+
+dependencies {
+    // https://mvnrepository.com
+    implementation 'org.java-websocket:Java-WebSocket:1.6.0'
+    implementation 'com.google.code.gson:gson:2.13.1'
+
+    implementation 'org.springframework.boot:spring-boot-starter:3.4.5'
+    implementation 'org.springframework:spring-context:6.2.6'
+    implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
+
+    compileOnly("org.projectlombok:lombok:1.18.38")
+    annotationProcessor("org.projectlombok:lombok:1.18.38")
+    testCompileOnly("org.projectlombok:lombok:1.18.38")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+application {
+    mainClass = 'net.user.server.ServerApp' // Клас, який запустить програму
+}
+
+test {
+    useJUnitPlatform()
+}
