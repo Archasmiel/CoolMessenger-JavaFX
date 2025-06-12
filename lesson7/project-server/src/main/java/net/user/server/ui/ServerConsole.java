@@ -1,5 +1,6 @@
 package net.user.server.ui;
 
+import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
@@ -16,10 +17,36 @@ public class ServerConsole extends ScrollPane {
         this.setVbarPolicy(ScrollBarPolicy.ALWAYS);   // завжди є смуга прокручення
     }
 
+    public void clearAll() {
+        container.getChildren().clear();
+    }
+
+    public boolean remove(int index) {
+        if (container.getChildren().size() <= index) {
+            return false;
+        }
+        container.getChildren().remove(index);
+        return true;
+    }
+
+    public MessageBubble get(int index) {
+        if (container.getChildren().size() <= index) {
+            return null;
+        }
+        return (MessageBubble) container.getChildren().get(index);
+        // явне приведення до типу даних --- (type) variable
+        // змінна має бути наслідуванням типу або простим типом
+        // у нашому випадку --- MessageBubble -> VBox ... -> Node
+    }
+
     public void addMessage(MessageBubble bubble) {
         container.getChildren().add(bubble);   // додати в список повідомлення
         this.layout();   // змусити оновитися панельку
         this.setVvalue(1.0);   // прокрутити в самий низ
+    }
+
+    public void addMessage(String header, String msg) {
+        this.addMessage( new MessageBubble(header, msg) );
     }
 
 }

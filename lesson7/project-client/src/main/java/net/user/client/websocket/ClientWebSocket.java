@@ -2,13 +2,12 @@ package net.user.client.websocket;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import javafx.application.Platform;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import net.user.client.ClientApp;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -48,6 +47,7 @@ public class ClientWebSocket extends WebSocketClient {
     @Override
     public void onClose(int code, String reason, boolean remote) {
         log.info("Connection closed: {}", getURI());
+        Platform.exit();
     }
 
     @Override

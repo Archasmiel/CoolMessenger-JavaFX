@@ -27,16 +27,20 @@ import org.springframework.stereotype.Component;
 public class ServerUI {
 
     private final ObservableList<Client> clients;
+    private final ServerConsole console;
 
     @FXML public TextField commandField;
     @FXML public Button sendButton;
     @FXML public ListView<Client> clientList;
-    public ServerConsole console;
     @FXML public BorderPane root;
 
     @Autowired
-    public ServerUI(ObservableList<Client> clients) {
+    public ServerUI(
+            ObservableList<Client> clients,
+            ServerConsole console
+    ) {
         this.clients = clients;
+        this.console = console;
     }
 
     @FXML
@@ -45,12 +49,7 @@ public class ServerUI {
         clientList.setSelectionModel(null);
         clientList.setItems(clients);
 
-        console = new ServerConsole();
         root.setCenter(console);
-        console.addMessage(new MessageBubble("TEST", "Nagger"));
-        console.addMessage(new MessageBubble("TEST", "Lorem ipsum"));
-        console.addMessage(new MessageBubble("TEST",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit."));
     }
 
 }
